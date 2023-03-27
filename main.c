@@ -16,10 +16,30 @@ Token* tokenizar(char* s, int* tamanho) {
                 tokens[index].operador = '+';
                 index++;
                 break;
-            case '-':
-                tokens[index].operador = '-';
+			case '-':
+				tokens[index].operador = '-';
+				index++;
+				break;
+			case '*':
+				tokens[index].operador = '*';
+				index++;
+				break;
+			case '/':
+				tokens[index].operador = '/';
+				index++;
+				break;
+            case '=':
+                tokens[index].operador = '=';
                 index++;
                 break;
+			case '==':
+				tokens[index].operador = '==';
+				index++;
+				break;
+			case '<>':
+				tokens[index].operador = '<>';
+				index++;
+				break;
             default:
                 // caso seja outro caractere, não faz nada
                 break;
@@ -31,7 +51,7 @@ Token* tokenizar(char* s, int* tamanho) {
 
 int main() {
     int tamanho;
-    Token* tokens = tokenizar("+++-", &tamanho);
+    Token* tokens = tokenizar("+-*/=<>==", &tamanho);
     printf("Tokens: ");
     for (int i = 0; i < tamanho; i++) {
         printf("%c ", tokens[i].operador);
