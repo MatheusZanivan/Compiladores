@@ -32,14 +32,6 @@ Token* tokenizar(char* s, int* tamanho) {
                 tokens[index].operador = '=';
                 index++;
                 break;
-			case '==':
-				tokens[index].operador = '==';
-				index++;
-				break;
-			case '<>':
-				tokens[index].operador = '<>';
-				index++;
-				break;
             default:
                 // caso seja outro caractere, não faz nada
                 break;
