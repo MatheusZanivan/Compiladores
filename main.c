@@ -3,42 +3,47 @@
 #include <string.h>
 
 typedef struct {
-    char operador;
+	char operador;
 } Token;
 
 Token* tokenizar(char* s, int* tamanho) {
-    Token* tokens = (Token*) malloc(strlen(s) * sizeof(Token));
-    int index = 0;
-    for (int i = 0; i < strlen(s); i++) {
-        char c = s[i];
-        switch (c) {
-            case '+':
-                tokens[index].operador = '+';
-                index++;
-                break;
+	Token* tokens = (Token*) malloc(strlen(s) * sizeof(Token));
+	int index = 0;
+	for (int i = 0; i < strlen(s); i++) {
+		char c = s[i];
+		switch (c) {
+			case '+':
+				tokens[index].operador = '+';
+				index++;
+				break;
 			case '-':
 				tokens[index].operador = '-';
 				index++;
 				break;
 			case '*':
-				tokens[index].operador = '*';
+				if (s[i+1] == '*') {
+					tokens[index].operador = '**';
+					i++; // avança mais um caractere, já que o símbolo é de 2 caracteres
+				} else {
+					tokens[index].operador = '*';
+				}
 				index++;
 				break;
 			case '/':
 				tokens[index].operador = '/';
 				index++;
 				break;
-            case '=':
-                tokens[index].operador = '=';
-                index++;
-                break;
-            default:
-                // caso seja outro caractere, não faz nada
-                break;
-        }
-    }
-    *tamanho = index;
-    return tokens;
+			case '=':
+				tokens[index].operador = '=';
+				index++;
+				break;
+			default:
+				// caso seja outro caractere, não faz nada
+				break;
+		}
+	}
+	*tamanho = index;
+	return tokens;
 }
 
 int main(int argc, char* argv[]) {
