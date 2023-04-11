@@ -88,3 +88,29 @@ int main(int argc, char* argv[]) {
 }
 
 
+//
+//
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <string.h>
+//
+//typedef struct {
+//	char *operador;
+//} Token;
+//
+//
+//// criar token(char *c)
+//// Token lista;
+//// lista.operador = malloc(strlen(c));
+//// lista.operador = c;
+//// return lista
+//
+//Token* tokenizar(char* s, int* tamanho) {
+//	Token* tokens = (Token*) malloc(strlen(s) * sizeof(Token));
+//	int index = 0;
+//	for (int i = 0; i < strlen(s); i++) {
+//		char c = s[i];
+//		switch (c) {
+//			case '+':
+//				tokens[*index] = criarToken(c);
+//				index++;
