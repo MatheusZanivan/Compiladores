@@ -48,40 +48,49 @@ int main(int argc, char** argv) {
 	
 	while (pc < MAX_VAL && run) {
 		switch (buffer[pc]) {
+			//
 			case 0xF0:
 				run = 0;  // Finaliza a execução do programa
 				break;
+			//
 			case 0x10:
 				pc++;
 				buffer[buffer[pc]] = acumulador;  // Armazena o valor de ACC na posição de memória apontada pelo valor em buffer[pc]
 				break;
+			//
 			case 0x20:
 				pc++;
 				acumulador = buffer[buffer[pc]];  // Carrega o valor da memória na posição apontada por buffer[pc] para ACC
 				z_flag = (acumulador == 0) ? 1 : 0;  // Atualiza Z_FLAG com base no novo valor de ACC
 				n_flag = (acumulador < 0) ? 1 : 0;   // Atualiza N_FLAG com base no novo valor de ACC
 				break;
+			//
 			case 0x30:
 				pc++;
 				acumulador += buffer[buffer[pc]];  // Soma o valor da memória na posição apontada por buffer[pc] a ACC
 				break;
+			//
 			case 0x40:
 				pc++;
 				acumulador |= buffer[buffer[pc]];  // Realiza uma operação de OR entre o valor da memória em buffer[pc] e ACC, armazenando o resultado em ACC
 				break;
+			//
 			case 0x50:
 				pc++;
 				acumulador &= buffer[buffer[pc]];  // Realiza uma operação de AND entre o valor da memória em buffer[pc] e ACC, armazenando o resultado em ACC
 				break;
+			//
 			case 0x60:
 				pc++;
 				acumulador = ~buffer[buffer[pc]];  // Realiza uma operação de NOT no valor da memória em buffer[pc] e armazena o resultado em ACC
 				break;
+			//
 			case 0x80:
 				pc++;
 				pc = buffer[pc];  // Define o novo valor de PC com base no valor em buffer[pc]
 				pc--;  // Decrementa PC para compensar o incremento na próxima iteração do loop
 				break;
+			//
 			case 0x90:
 				if (n_flag) {
 					pc++;
@@ -89,6 +98,7 @@ int main(int argc, char** argv) {
 					pc--;  // Decrementa PC para compensar o incremento na próxima iteração do loop
 				}
 				break;
+			//
 			case 0xA0:
 				if (z_flag) {
 					pc++;
